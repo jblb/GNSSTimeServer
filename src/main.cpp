@@ -28,6 +28,9 @@ byte packetBuffer[NTP_PACKET_SIZE];
 // An Ethernet UDP instance
 WiFiUDP Udp;
 
+// Baud rate for GPS
+#define GPS_BAUD 9600
+
 // Syslog support
 #include <Syslog.h>
 
@@ -89,20 +92,23 @@ TickType_t pps_blink_time = 0;
 #define CS 5
 #define INT 25
 
-#define LOCK_LED 13
-#define WIFI_BUTTON 26
+// #define LOCK_LED 13
+// #define WIFI_BUTTON 26
 
 #define AP_CHANNEL 3
 #define HOSTNAME "GNSSTimeServerV2WE" // Hostname used for syslog and DHCP
 #else
-#define LOCK_LED 19
-#define WIFI_BUTTON 5
+// #define LOCK_LED 19
+// #define WIFI_BUTTON 5
 
 #define AP_CHANNEL 2
 // #define LOCK_LED 13
 // #define WIFI_BUTTON 26
 #define HOSTNAME "GNSSTimeServerV2W" // Hostname used for syslog and DHCP
 #endif
+
+#define LOCK_LED 13
+#define WIFI_BUTTON 26
 
 // Priority tasks
 // TaskHandle_t FGP; // FeedGPSParser
@@ -1674,12 +1680,12 @@ void setup()
   u8g2log.print("\nStarting COM and FS...");
 #if defined(ARDUINO_ARCH_ESP8266)
   // ss.begin (13U, 15U); // ESP8266 D7, D8
-  ss.begin(9600);     // set GPS baud rate to 9600 bps
+  ss.begin(GPS_BAUD);     // set GPS baud rate to 9600 bps
   Wire.begin(4U, 5U); // ESP8266 D2, D1 - due to limited pins, use pin 0 and 2 for SDA, SCL
   LittleFS.begin();   // Init storage for WiFi SSID/PSK -- true = FORMAT_LITTLEFS_IF_FAILED
   u8g2log.print(" Done\n");
 #elif defined(ESP32)
-          ss.begin(115200);
+          ss.begin(GPS_BAUD);
           Wire.begin(21U, 22U);
           LittleFS.begin(true); // Init storage for WiFi SSID/PSK -- true = FORMAT_LITTLEFS_IF_FAILED
           u8g2log.print(" Done\n");
