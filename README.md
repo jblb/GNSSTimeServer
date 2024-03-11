@@ -3,7 +3,7 @@
 by JbLb
 
   * GPS baud rate as #define
-  * All pins his identical regarless use of W5500 [See pinout.md](./Pinout.md)
+  * All pins his identical regarless use of W5500 [See pinout.md](./pinout.md)
 
 <p align="center"><a href="https://docs.google.com/forms/d/e/1FAIpQLSchZhBenU4u7z4XQDj6ZXXRinHSWwy8loy8uxbl7-j-GinHIg/viewform" target="_blank">
  <img src="https://github.com/Montecri/GNSSTimeServer/assets/38574378/809ed768-7c58-455c-b6e0-5b2a80768d20" alt="Answer Survey" width="64" border="10" />
